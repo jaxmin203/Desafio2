@@ -1,0 +1,40 @@
+% Método de Jacobi en MATLAB
+
+% Parámetros
+tol = 1e-5; % Tolerancia para la convergencia
+max_iter = 100; % Número máximo de iteraciones
+
+% Valores iniciales
+x1 = 0;
+x2 = 0;
+x3 = 0;
+
+% Inicializamos variables
+x1_new = x1;
+x2_new = x2;
+x3_new = x3;
+
+% Iteración del método de Jacobi
+for k = 1:max_iter
+    % Calcular los nuevos valores de x1, x2 y x3
+    x3_new = (8 - 2*x2) / 6;
+    x1_new = 2 - x3_new; % Aquí se usa x3_new actualizado
+    x2_new = (13 - 8*x1) / 5;
+    
+    % Mostrar los resultados de la iteración
+    fprintf('Iteración %d: x1 = %.6f, x2 = %.6f, x3 = %.6f\n', k, x1_new, x2_new, x3_new);
+    
+    % Verificar la convergencia
+    if abs(x1_new - x1) < tol && abs(x2_new - x2) < tol && abs(x3_new - x3) < tol
+        fprintf('Convergencia alcanzada en %d iteraciones.\n', k);
+        break;
+    end
+    
+    % Actualizar los valores de x1, x2 y x3 para la próxima iteración
+    x1 = x1_new;
+    x2 = x2_new;
+    x3 = x3_new;
+end
+
+% Imprimir los valores finales
+fprintf('Solución final: x1 = %.6f, x2 = %.6f, x3 = %.6f\n', x1, x2, x3);
